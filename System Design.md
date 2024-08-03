@@ -707,10 +707,23 @@ erDiagram
     DELIVERY {
         int delivery_id PK
         int order_id FK
-        int delivery_person_id FK
+        int agent_id FK
         string status
         datetime estimated_delivery_time
         datetime actual_delivery_time
+        datetime created_at
+        datetime updated_at
+    }
+
+    DELIVERY_AGENTS {
+        int agent_id PK
+        string name
+        string email
+        string phone_number
+        string vehicle_details
+        string status
+        string current_location
+        float rating
         datetime created_at
         datetime updated_at
     }
@@ -728,6 +741,8 @@ erDiagram
     ORDERS ||--o{ ORDER_ITEMS : consists_of
     ORDERS ||--o{ PAYMENTS : is_paid_by
     ORDERS ||--o{ DELIVERY : is_delivered_by
+
+    DELIVERY_AGENTS ||--o{ DELIVERY : handles
 ```
 
 
@@ -838,6 +853,22 @@ erDiagram
      - `created_at`: Timestamp when the delivery was created.
      - `updated_at`: Timestamp when the delivery was last updated.
 
+10.  **Delivery Agent**
+    - **Description**: This table stores information about delivery agents who handle the delivery of orders from restaurants to customers.
+
+    - **Columns**:
+      -  `agent_id`: Unique identifier for each delivery agent (Primary Key).
+      -  `name`: Name of the delivery agent.
+      -  `email`: Email address of the delivery agent.
+      -  `phone_number`: Phone number of the delivery agent.
+      -  `vehicle_details`: Information about the vehicle used by the delivery agent (e.g., type, license plate).
+      -  `status`: Current status of the delivery agent (e.g., available, busy).
+      -  `current_location`: Location coordinates (latitude and longitude) for real-time tracking.
+      -  `rating`: Average rating of the delivery agent based on customer feedback.
+      -  `created_at`: Timestamp when the delivery agent record was created.
+      -  `updated_at`: Timestamp when the delivery agent record was last updated.
+
+
 ### Relationships
 
 1. **Users to Orders**: One-to-many relationship. A user can place multiple orders.
@@ -869,6 +900,9 @@ erDiagram
    
 10. **Orders to Delivery**: One-to-one relationship. An order has one associated delivery.
     - `Orders.order_id` → `Delivery.order_id`
+
+11. **Delivery Agents to Delivery**: One-to-many relationship. A delivery agent can handle multiple deliveries.
+    - `delivery_agents.agent_id` → `delivery.delivery_person_id`
 
 ### What kind of database should we use?
 
