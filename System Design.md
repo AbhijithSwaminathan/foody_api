@@ -725,9 +725,9 @@ erDiagram
     
     MENUS ||--o{ MENU_ITEMS : contains
     
-    ORDERS ||--o{ ORDER_ITEMS : consists of
-    ORDERS ||--o{ PAYMENTS : is paid by
-    ORDERS ||--o{ DELIVERY : is delivered by
+    ORDERS ||--o{ ORDER_ITEMS : consists_of
+    ORDERS ||--o{ PAYMENTS : is_paid_by
+    ORDERS ||--o{ DELIVERY : is_delivered_by
 ```
 
 
