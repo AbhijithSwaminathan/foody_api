@@ -855,19 +855,17 @@ erDiagram
 
 10.  **Delivery Agent**
     - **Description**: This table stores information about delivery agents who handle the delivery of orders from restaurants to customers.
-
     - **Columns**:
-      -  `agent_id`: Unique identifier for each delivery agent (Primary Key).
-      -  `name`: Name of the delivery agent.
-      -  `email`: Email address of the delivery agent.
-      -  `phone_number`: Phone number of the delivery agent.
-      -  `vehicle_details`: Information about the vehicle used by the delivery agent (e.g., type, license plate).
-      -  `status`: Current status of the delivery agent (e.g., available, busy).
-      -  `current_location`: Location coordinates (latitude and longitude) for real-time tracking.
-      -  `rating`: Average rating of the delivery agent based on customer feedback.
-      -  `created_at`: Timestamp when the delivery agent record was created.
-      -  `updated_at`: Timestamp when the delivery agent record was last updated.
-
+     -  `agent_id`: Unique identifier for each delivery agent (Primary Key).
+     -  `name`: Name of the delivery agent.
+     -  `email`: Email address of the delivery agent.
+     -  `phone_number`: Phone number of the delivery agent.
+     -  `vehicle_details`: Information about the vehicle used by the delivery agent (e.g., type, license plate).
+     -  `status`: Current status of the delivery agent (e.g., available, busy).
+     -  `current_location`: Location coordinates (latitude and longitude) for real-time tracking.
+     -  `rating`: Average rating of the delivery agent based on customer feedback.
+     -  `created_at`: Timestamp when the delivery agent record was created.
+     -  `updated_at`: Timestamp when the delivery agent record was last updated. 
 
 ### Relationships
 
@@ -980,3 +978,90 @@ Using a hybrid approach leverages the strengths of both types of databases, ensu
    - Use for high-speed access and reducing load on PostgreSQL.
 
 By combining PostgreSQL and Redis, you create a robust, scalable, and efficient data management system for the food delivery app, meeting all the functional, non-functional, and extended requirements.
+
+
+## API Design
+
+### User Management
+1. **[Register User](user/register.md):** **POST** `/users/register` 
+2. **[User Login](user/login.md):** **POST** `/users/login` 
+3. **[Get User Profile](user/profile/get.md):** **GET** `/users/profile` 
+4. **[Update User Profile](user/profile/put.md):** **PUT** `/users/profile` 
+5. **[Delete User Profile](user/profile/delete.md):** **DELETE** `/users/profile`
+
+### Restaurant Management
+1. **[Register a new restaurant](restaurants/register.md):** **POST** `/restaurants/register`
+2. **[Restaurant login](restaurants/login.md):** **POST** `/restaurants/login`
+3. **[Get restaurant profile](restaurants/profile/get.md):** **GET** `/restaurants/profile`
+4. **[Update restaurant profile](restaurants/profile/put.md):** **PUT** `/restaurants/profile`
+5. **[Delete restaurant profile](restaurants/profile/delete.md):** **DELETE** `/restaurants/profile` 
+6. **[Get a list of all restaurants](restaurants/get.md):** **GET** `/restaurants`
+7. **[Get details of a specific restaurant](restaurants/get_id.md):** **GET** `/restaurants/{id}`
+8. **[Add a new restaurant (Admin)](restaurants/post.md):** **POST** `/restaurants`
+9. **[Update restaurant details (Admin)](restaurants/put.md):** **PUT** `/restaurants/{id}`
+10. **[Delete a restaurant (Admin)](restaurants/delete.md):** **DELETE** `/restaurants/{id}`
+
+### Menu Management
+1. **[]():** **GET** `/restaurants/{restaurant_id}/menus` - Get menus of a specific restaurant
+2. **[]():** **GET** `/menus/{id}` - Get details of a specific menu
+3. **[]():** **POST** `/restaurants/{restaurant_id}/menus` - Add a new menu to a restaurant (Admin)
+4. **[]():** **PUT** `/menus/{id}` - Update menu details (Admin)
+5. **[]():** **DELETE** `/menus/{id}` - Delete a menu (Admin)
+
+### Menu Items Management
+1. **[]():** **GET** `/menus/{menu_id}/items` - Get items of a specific menu
+2. **[]():** **GET** `/items/{id}` - Get details of a specific menu item
+3. **[]():** **POST** `/menus/{menu_id}/items` - Add a new item to a menu (Admin)
+4. **[]():** **PUT** `/items/{id}` - Update menu item details (Admin)
+5. **[]():** **DELETE** `/items/{id}` - Delete a menu item (Admin)
+
+### Order Management
+1. **[]():** **POST** `/orders` - Create a new order
+2. **[]():** **GET** `/orders/{id}` - Get details of a specific order
+3. **[]():** **GET** `/users/{user_id}/orders` - Get all orders for a specific user
+4. **[]():** **PUT** `/orders/{id}` - Update order details (e.g., status)
+5. **[]():** **DELETE** `/orders/{id}` - Cancel/delete an order
+
+### Order Items Management
+1. **[]():** **GET** `/orders/{order_id}/items` - Get items of a specific order
+2. **[]():** **POST** `/orders/{order_id}/items` - Add an item to an order
+3. **[]():** **PUT** `/order-items/{id}` - Update order item details
+4. **[]():** **DELETE** `/order-items/{id}` - Remove an item from an order
+
+### Payment Management
+1. **[]():** **POST** `/payments` - Create a new payment
+2. **[]():** **GET** `/payments/{id}` - Get details of a specific payment
+3. **[]():** **GET** `/users/{user_id}/payments` - Get all payments for a specific user
+4. **[]():** **PUT** `/payments/{id}` - Update payment details
+5. **[]():** **DELETE** `/payments/{id}` - Cancel/delete a payment
+
+### Review Management
+1. **[]():** **POST** `/reviews` - Add a new review
+2. **[]():** **GET** `/reviews/{id}` - Get details of a specific review
+3. **[]():** **GET** `/restaurants/{restaurant_id}/reviews` - Get all reviews for a specific restaurant
+4. **[]():** **PUT** `/reviews/{id}` - Update review details
+5. **[]():** **DELETE** `/reviews/{id}` - Delete a review
+
+### Delivery Management
+1. **[]():** **POST** `/deliveries` - Create a new delivery
+2. **[]():** **GET** `/deliveries/{id}` - Get details of a specific delivery
+3. **[]():** **GET** `/orders/{order_id}/delivery` - Get delivery details for a specific order
+4. **[]():** **PUT** `/deliveries/{id}` - Update delivery details (e.g., status)
+5. **[]():** **DELETE** `/deliveries/{id}` - Cancel/delete a delivery
+
+### Delivery Agent Management
+1. **[]():** **POST** `/delivery-agents/register` - Register a new delivery agent
+2. **[]():** **POST** `/delivery-agents/login` - Delivery agent login
+3. **[]():** **GET** `/delivery-agents/profile` - Get delivery agent profile
+4. **[]():** **PUT** `/delivery-agents/profile` - Update delivery agent profile
+5. **[]():** **DELETE** `/delivery-agents/profile` - Delete delivery agent profile
+6. **[]():** **GET** `/delivery-agents/{id}` - Get details of a specific delivery agent
+7. **[]():** **GET** `/delivery-agents` - Get a list of all delivery agents
+8. **[]():** **PUT** `/delivery-agents/{id}` - Update delivery agent details (Admin)
+9. **[]():** **DELETE** `/delivery-agents/{id}` - Delete a delivery agent (Admin)
+
+### Caching and Sessions (using Redis)
+1. **[]():** **POST** `/sessions` - Create a new user session
+2. **[]():** **GET** `/sessions/{id}` - Get details of a specific session
+3. **[]():** **PUT** `/sessions/{id}` - Update session details
+4. **[]():** **DELETE** `/sessions/{id}` - Delete a session
